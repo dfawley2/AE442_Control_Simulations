@@ -5,7 +5,6 @@ vel = yi(4:6); % m/s, velocity vector
 angPos = yi(7:9); % rad, euler angles, (theta, phi, psi) = (roll, pitch, yaw)
 propMass = yi(13); % kg, mass of propellant left
 
-mu = 1.18*10^-5; % kg/ms, viscosity of air
 cg = getCg(rocket, motor, propMass);
 massTot = propMass + motor.dryMass + rocket.structure.dryMass;
 rho = getAtmDensity(pos(3), models);
@@ -57,8 +56,10 @@ FLiftFinI = .5*rho*velPerpMag.^2*rocket.fin.area.*clFin.*liftVec;
 % Assume constant drag and no lift
 cdBody = rocket.aero.bodyCd;
 
-% Model drag on circular flat plate
-FDragBodyI = .5*rho*norm(vel)^2*cdBody*pi*(rocket.structure.tubeDiameter/2)^2;
+% Model drag on circular cylinder with axial flow
+% https://aip.scitation.org/doi/pdf/10.1063/1.864706  
+epsilon = 1/log(2*rocket.structure.length/rocket.structure.tubeDiameter); % length/diameter of rocket
+FDragBodyI = (epsilon + .80685*epsilon^2 + 0.82854*epsilon^3); % N
 
 %% Thrust Force
 if ctrl.igniteMotor

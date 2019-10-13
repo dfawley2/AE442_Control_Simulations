@@ -1,7 +1,7 @@
 clear all;
 run setup.m
 
-mass = 1.5;
+mass = 1;
 alt0 = 20;
 leng = .5;
 diameter = .076;
@@ -13,7 +13,7 @@ models = getModels();
 rocket = getRocketTradeStudy1(motor, mass, alt0, leng, diameter);
 result = simulate(motor,rocket,controller, models);
 
-figure(1)
+figure()
 grid on
 hold on
 
@@ -31,13 +31,5 @@ s_dir = '\\ad.uillinois.edu\engr-ews\dfawley2\documents\Classes\AE 442\TradeStud
 fig_name = strcat('mass=',num2str(mass),'length=',num2str(leng),...
     'diameter=',num2str(diameter),'.png');
 print(gcf,'-dpng',fullfile(s_dir,fig_name));
-
-
-
-
-
-%%
-
-drawRocket(result,rocket);
 
 
