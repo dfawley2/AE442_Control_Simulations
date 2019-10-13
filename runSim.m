@@ -4,9 +4,9 @@ run setup.m
 mass = 1;
 alt0 = 20;
 leng = .5;
-diameter = .076;
+diameter = .08;
 
-motor = F22Motor();
+motor = F15Motor();
 controller = stateSpace();
 models = getModels();
 
@@ -17,7 +17,7 @@ figure()
 grid on
 hold on
 
-plot(abs(result.traj.velI(3,:)),result.traj.posI(3,:),'linewidth',3);
+plot((result.traj.velI(3,:)),result.traj.posI(3,:),'linewidth',3);
 
 xlabel('Planet-relative Velocity, m/s');
 ylabel('Altitude, m');

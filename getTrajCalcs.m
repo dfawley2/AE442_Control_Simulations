@@ -76,7 +76,7 @@ if ctrl.igniteMotor
     % Find dm/dt from thrust
     switch models.deltaMassMode
         case 1 % constant mass flow
-            dmdt = (motor.wetMass - motor.dryMass)/motor.thrust(end,1);
+            dmdt = -(motor.wetMass - motor.dryMass)/motor.thrust(end,1);
             
         case 2 % fit thrust curve profile
             
