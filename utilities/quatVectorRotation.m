@@ -17,7 +17,7 @@ if p == 3
     v = v';
 end
 
-V = quatrotate(q,v);
+V = quatRotate(q,v);
 
 if p == 3
     V = V';

@@ -48,7 +48,7 @@ fig.view0.light = light('position',[-1;1;1],'style','local');
 [pointsRocket, facesRocket, cDataRocket, pointsThruster, facesThruster, cDataThruster] = getRocketModel(rocket);
 
 %%
-for i = 1:length(result.traj.tCurr)
+for i = 1:length(result.traj.time)
     velocity = norm(result.traj.velI(:,i));
     if result.traj.velI(3,i) > 1
         velSign = 1;
