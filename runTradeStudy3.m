@@ -1,13 +1,20 @@
 clear all;
+close all
 run setup.m
 
+mass = .8;
+diameter = .0762;
+leng = .508;
+alt0 = 12.192;
+
+
 motor = E12Motor();
-controller = stateSpace();
+controller = [];
 models = getModels();
 
-rocket = getRocket(motor);
+rocket = getRocketTradeStudy3(motor, mass, alt0, leng, diameter);
 result = simulate(motor,rocket,controller, models);
-%%
+
 
 % figure()
 % grid on
@@ -26,9 +33,15 @@ result = simulate(motor,rocket,controller, models);
 % set(gcf,'paperorientation','portrait');
 % set(gcf,'paperunits','normalized')
 % set(gcf,'paperposition',[0 0 1 1]);
-% s_dir = '\\ad.uillinois.edu\engr-ews\dfawley2\documents\Classes\AE 442\PDR';
-% fig_name = 'PDRAltVel'; %strcat('mass=',num2str(mass),'length=',num2str(leng),...
-% %     'diameter=',num2str(diameter),'.png');
+% s_dir = "\\ad.uillinois.edu\engr-ews\dfawley2\documents\Classes\AE 442\Trade Study 3";
+% fig_name = strcat('mass=',num2str(mass),'length=',num2str(leng),...
+%     'diameter=',num2str(diameter),'.png');
 % print(gcf,'-dpng',fullfile(s_dir,fig_name));
+
+
+
+
+
+
 
 drawRocket(result, rocket)

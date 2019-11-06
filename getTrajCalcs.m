@@ -5,15 +5,14 @@ vel = yi(4:6); % m/s, velocity vector
 angPos = yi(7:9); % rad, euler angles, (theta, phi, psi) = (roll, pitch, yaw)
 propMass = yi(13); % kg, mass of propellant left
 
-mu = 1.18*10^-5; % kg/ms, viscosity of air
-cg = getCg(rocket, motor, propMass);
+cg = getCg(rocket, motor, propMass); % cg from bottom of rocket
 massTot = propMass + motor.dryMass + rocket.structure.dryMass;
 rho = getAtmDensity(pos(3), models);
 qi2b = quatFromEulerAngles(angPos);
 MOI = getMOI(rocket, motor, cg, yi);
 
 %% Fin drag
-% roll direction offset of each fin
+% roll direction offset of each fin from +y axis
 finAngles = linspace(0,2*pi,rocket.fin.numFins+1);
 finAngles(end) = [];
 
@@ -51,7 +50,8 @@ liftVec = cross(dragVec, finRadialVecI);
 liftVec = unit(liftVec); % nd, direction of lift vector
 
 FDragFinI = .5*rho*velPerpMag.^2*rocket.fin.area.*cdFin.*dragVec;
-FLiftFinI = .5*rho*velPerpMag.^2*rocket.fin.area.*clFin.*liftVec;
+FLiftFinI = zeros(size(FDragFinI));
+% .5*rho*velPerpMag.^2*rocket.fin.area.*clFin.*liftVec;
 
 %% Body Tube and Nosecone Drag
 % Assume constant drag and no lift

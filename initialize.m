@@ -13,20 +13,23 @@ result.traj.dragBodyI = trajCalcs.FDragBodyI;
 result.traj.dragFin1I = trajCalcs.FDragFinI(:,1);
 result.traj.dragFin2I = trajCalcs.FDragFinI(:,2);
 result.traj.dragFin3I = trajCalcs.FDragFinI(:,3);
-result.traj.dragFin4I = trajCalcs.FDragFinI(:,4);
 result.traj.liftFin1I = trajCalcs.FLiftFinI(:,1);
 result.traj.liftFin2I = trajCalcs.FLiftFinI(:,2);
 result.traj.liftFin3I = trajCalcs.FLiftFinI(:,3);
-result.traj.liftFin4I = trajCalcs.FLiftFinI(:,4);
 result.traj.momentFin1I = trajCalcs.MFinsI(:,1);
 result.traj.momentFin2I = trajCalcs.MFinsI(:,2);
 result.traj.momentFin3I = trajCalcs.MFinsI(:,3);
-result.traj.momentFin4I = trajCalcs.MFinsI(:,4);
 result.traj.rho = trajCalcs.rho;
 result.traj.qi2b = trajCalcs.qi2b;
 result.traj.clFin = trajCalcs.clFin';
 result.traj.cdFin = trajCalcs.cdFin';
 result.traj.aoa = trajCalcs.alpha';
+
+if rocket.fin.numFins > 4
+    result.traj.dragFin4I = trajCalcs.FDragFinI(:,4);
+    result.traj.liftFin4I = trajCalcs.FLiftFinI(:,4);
+    result.traj.momentFin4I = trajCalcs.MFinsI(:,4);
+end
 
 % Navigation
 result.nav.posI = nav.posI;

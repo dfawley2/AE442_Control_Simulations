@@ -48,7 +48,7 @@ end
 function result = storeData(trajCalcs, tCurr, y, nav, ctrl, terminate, result, counter )
 
 % Trajectory
-result.traj.tCurr(:,counter) = tCurr;
+result.traj.time(:,counter) = tCurr;
 result.traj.posI(:,counter) = y(1:3);
 result.traj.velI(:,counter) = y(4:6);
 result.traj.EulerAngles(:,counter) = y(7:9);
@@ -60,21 +60,26 @@ result.traj.dragBodyI(:,counter) = trajCalcs.FDragBodyI;
 result.traj.dragFin1I(:,counter) = trajCalcs.FDragFinI(:,1);
 result.traj.dragFin2I(:,counter) = trajCalcs.FDragFinI(:,2);
 result.traj.dragFin3I(:,counter) = trajCalcs.FDragFinI(:,3);
-result.traj.dragFin4I(:,counter) = trajCalcs.FDragFinI(:,4);
 result.traj.liftFin1I(:,counter) = trajCalcs.FLiftFinI(:,1);
 result.traj.liftFin2I(:,counter) = trajCalcs.FLiftFinI(:,2);
 result.traj.liftFin3I(:,counter) = trajCalcs.FLiftFinI(:,3);
-result.traj.liftFin4I(:,counter) = trajCalcs.FLiftFinI(:,4);
 result.traj.momentFin1I(:,counter) = trajCalcs.MFinsI(:,1);
 result.traj.momentFin2I(:,counter) = trajCalcs.MFinsI(:,2);
 result.traj.momentFin3I(:,counter) = trajCalcs.MFinsI(:,3);
-result.traj.momentFin4I(:,counter) = trajCalcs.MFinsI(:,4);
 result.traj.rho(:,counter) = trajCalcs.rho;
 result.traj.qi2b(:,counter) = trajCalcs.qi2b;
+result.traj.MOI(:,counter) = diag(trajCalcs.MOI);
 result.traj.clFin(:,counter) = trajCalcs.clFin';
 result.traj.cdFin(:,counter) = trajCalcs.cdFin';
 result.traj.aoa(:,counter) = trajCalcs.alpha';
 result.traj.accel(:,counter) = trajCalcs.accel';
+
+if size(trajCalcs.FLiftFinI, 2) > 4
+    result.traj.dragFin4I(:,counter) = trajCalcs.FDragFinI(:,4);
+    result.traj.liftFin4I(:,counter) = trajCalcs.FLiftFinI(:,4);
+    result.traj.momentFin4I(:,counter) = trajCalcs.MFinsI(:,4);
+end
+
 
 % Navigation
 result.nav.posI(:,counter) = nav.posI;
@@ -83,7 +88,7 @@ result.nav.EularAngles(:,counter) = nav.EulerAngles;
 result.nav.omega(:,counter) = nav.omega;
 
 % Control
-result.ctrl.igniteCotor(counter) = ctrl.igniteMotor;
+result.ctrl.igniteMotor(counter) = ctrl.igniteMotor;
 result.ctrl.tIgnite(counter) = ctrl.tIgnite;
 
 result.term.endCondition(counter) = terminate;
