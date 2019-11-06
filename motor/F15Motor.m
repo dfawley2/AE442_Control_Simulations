@@ -28,3 +28,4 @@ motordata.thrust = [
 motordata.dryMass = 0.043; % kg
 motordata.wetMass = .103; % kg
 motordata.height = .114; % m
+motordata.diameter = .029; % m

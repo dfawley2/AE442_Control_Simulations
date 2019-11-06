@@ -1,4 +1,4 @@
-function motordata = F15Motor()
+function motordata = C6Motor()
 % http://nar.org/SandT/pdf/Estes/C6.pdf
 motordata.thrust = [
 0 0 
@@ -30,3 +30,4 @@ motordata.thrust = [
 motordata.dryMass = 0.0094; % kg
 motordata.wetMass = .0202; % kg
 motordata.height = .070; % m
+motordata.diameter = .018; % m
